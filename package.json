@@ -1,0 +1,28 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "first time with node js ",
+  "keywords": [
+    "nodejs",
+    "react"
+  ],
+  "homepage": "https://github.com/phamtuan2005tm-cpu/NodeJs-Zero#readme",
+  "bugs": {
+    "url": "https://github.com/phamtuan2005tm-cpu/NodeJs-Zero/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phamtuan2005tm-cpu/NodeJs-Zero.git"
+  },
+  "license": "ISC",
+  "author": "Thai Tuan",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
