@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Học Sinh</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <h2>Thêm Học Sinh Mới</h2>
+    <form action="/create-student" method="POST">
+        <div>
+            <label>Tên học sinh:</label>
+            <input type="text" name="studentName" required placeholder="Nhập tên học sinh..." />
+        </div>
+        <br />
+        <div>
+            <label>Email phụ huynh:</label>
+            <input type="email" name="studentEmail" required placeholder="Nhập email..." />
+        </div>
+        <br />
+        <div>
+            <label>Thành phố:</label>
+            <input type="text" name="studentCity" value="TP HCM" required />
+        </div>
+        <br />
+        <button type="submit"
+            style="color: white; background-color:rgb(54, 82, 242); border: 2px solid black; border-radius: 4px; ">Lưu
+            Học
+            Sinh</button>
+    </form>
+    <hr />
+
+    <h2>Danh Sách Lớp Học Thầy Tuấn</h2>
+    <table border="4" cellpadding="10" cellspacing="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên Học Sinh</th>
+                <th>Email Phụ Huynh</th>
+                <th>Thành Phố</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let i=0; i < listStudent.length; i++) { %>
+                <tr>
+                    <td>
+                        <%= listStudent[i].id %>
+                    </td>
+                    <td>
+                        <%= listStudent[i].name %>
+                    </td>
+                    <td>
+                        <%= listStudent[i].email %>
+                    </td>
+                    <td>
+                        <%= listStudent[i].city %>
+                    </td>
+                    <td>
+                        <form action="/delete/<%= listStudent[i].id %>" method="POST"
+                            onsubmit="return confirm('Chắc chắn thực hiện xóa học sinh')">
+                            <button
+                                style="border-radius: 4px;padding: 6px 12px;background: red; color: white; border: 2px solid black">Xóa</button>
+                            <a href="/update-student/<%= listStudent[i].id %>" class="btn-edit"
+                                style="border: 2px solid black;margin-right: 5px; text-decoration: none; display: inline-block; padding: 6px 12px; background: #e0f2fe; color: #0369a1; border-radius: 4px; font-size: 12px; font-weight: 600;">Sửa</a>
+                        </form>
+                    </td>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chỉnh Sửa Học Sinh</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f7f6;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            color: #0369a1;
+            border-bottom: 2px solid #0369a1;
+            padding-bottom: 5px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        button {
+            cursor: pointer;
+            font-weight: 600;
+            background-color: #0369a1;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0c4a6e;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Chỉnh Sửa Thông Tin Học Sinh</h2>
+        <form action="/update-student/execute" method="POST">
+            <input type="hidden" name="studentId" value="<%= studentData.id %>" />
+
+            <div class="form-group">
+                <label>Tên học sinh:</label>
+                <input type="text" name="studentName" value="<%= studentData.name %>" required />
+            </div>
+            <div class="form-group">
+                <label>Email phụ huynh:</label>
+                <input type="email" name="studentEmail" value="<%= studentData.email %>" required />
+            </div>
+            <div class="form-group">
+                <label>Thành phố:</label>
+                <input type="text" name="studentCity" value="<%= studentData.city %>" required />
+            </div>
+            <button type="submit">Cập Nhật Thông Tin</button>
+        </form>
+    </div>
+</body>
+
+</html>

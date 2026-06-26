@@ -1,4 +1,143 @@
-.my-image {
-    width: 300px;
-    border: 1px solid black;
-}
+body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #93d7c0;
+            color: #333;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+
+        h2 {
+            color: #16a085;
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #16a085;
+            padding-bottom: 5px;
+            width: 100%;
+        }
+
+        /* --- Khung Container bọc lại cho gọn --- */
+        .container {
+            width: 100%;
+            max-width: 850px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        /* --- Định hình Form nhập liệu --- */
+        form.create-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            align-items: end;
+            background: #fdfefe;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+
+        form.create-form .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form.create-form label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+
+        form.create-form input {
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        form.create-form input:focus {
+            border-color: #16a085;
+            box-shadow: 0 0 5px rgba(22, 160, 133, 0.2);
+        }
+
+        /* --- Định hình Bảng dữ liệu --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background-color: #16a085;
+            color: white;
+            font-weight: 600;
+            text-align: left;
+            padding: 12px 15px;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #4a5568;
+            font-size: 14px;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* --- Các loại Nút bấm --- */
+        button {
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn-submit {
+            background-color: #16a085;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background-color: #117a65;
+        }
+
+        .btn-delete {
+            background-color: #fff5f5;
+            color: #e53e3e;
+            border: 1px solid #fed7d7;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .btn-delete:hover {
+            background-color: #e53e3e;
+            color: white;
+            border-color: #e53e3e;
+        }
