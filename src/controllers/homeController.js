@@ -1,4 +1,6 @@
 const db = require('../config/database'); 
+const { validationResult } = require('express-validator');
+const bcrypt = require('bcrypt');
 
 const getHomepage =  (req, res) => {
     res.send('Hello World! Im tuan')
@@ -79,6 +81,83 @@ const handleUpdateStudent = async (req, res) => {
         return res.send("Hệ thống tạm thời bảo trì xin quay lại sau !")
     }
 }
+
+const getLoginPage = async (req, res) => {
+   res.render('loginPage.ejs');
+}
+
+const getRegisterPage = async (req, res) => {
+    res.render('registerPage.ejs');
+}
+const handleRegister = async (req, res) => {
+    try {
+        const email = req.body.userEmail;
+        const password = req.body.userPassword;
+
+        const errors = validationResult(req);
+        if(!errors.isEmpty()) {
+            return res.render('register.ejs', { 
+                errors: errors.array(),
+                oldData: req.body 
+            });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        await db.query("INSERT INTO users (user_email, password) VALUES (?,?)",
+            [email, hashedPassword]
+        );
+        res.redirect('/login');
+    } catch (err) {
+        console.error("Bẩm báo có lỗi cập nhật!!!", err.message);
+        return res.send("Hệ thống tạm thời bảo trì xin quay lại sau !")
+    }
+}
+
+const handleLogin = async (req, res) => {
+    try {
+        const email = req.body.userEmail;
+        const password = req.body.userPassword;
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.render('loginPage.ejs', {
+                errorMessage: errors.array()[0].msg,
+                oldData: req.body // 🌟 ĐÃ SỬA: Gom sạch vào oldData để EJS không bị lú biến
+            });
+        }
+
+        // 2. TÌM USER TRONG DATABASE
+        const [rows] = await db.query("SELECT * FROM users WHERE user_email = ?", [email]);
+        if (rows.length === 0) {
+            return res.render('loginPage.ejs', {
+                errorMessage: "Tài khoản không tồn tại trên hệ thống!",
+                oldData: req.body // 🌟 ĐÃ SỬA: Đồng bộ ném vào oldData
+            });
+        }
+
+        const user = rows[0];
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (isMatch) {
+            return res.redirect('/student');
+        } else {
+            return res.render('loginPage.ejs', {
+                errorMessage: "Mật khẩu không chính xác!",
+                oldData: req.body // 🌟 ĐÃ SỬA: Đồng bộ ném vào oldData
+            });
+        }
+    } catch (err) {
+        console.error("❌ Lỗi đăng nhập:", err.message);
+        return res.render('loginPage.ejs', { 
+            errorMessage: "Hệ thống đăng nhập đang bận!",
+            oldData: req.body 
+        });
+    }
+}
+
+
 module.exports = {
     getHomepage, 
     getABC, 
@@ -87,6 +166,10 @@ module.exports = {
     handlePostCreateStudent,
     handleDeleteStudent, 
     getUpdateStudent, 
-    handleUpdateStudent
+    handleUpdateStudent,
+    getLoginPage,
+    getRegisterPage, 
+    handleRegister, 
+    handleLogin
 }
 
